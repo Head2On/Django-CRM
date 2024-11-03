@@ -2,9 +2,47 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+
 {% if user.is_authenticated %}
-<h1>Hellow </h1>
+<h1>Customres..</h1>
+
+<table class="table table-hover table-bordered border-primary">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">Zip</th>
+      <th scope="col">State</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if customers %}
+    {% for customer in  customers %}
+      <tr>
+        <td><a href="{% url 'record' customer.id %}">{{customer.id}}</a></td>
+        <td><a href="{% url 'record' customer.id %}"> {{customer.first_name}}
+             {{customer.last_name}}</a>
+        </td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.address}}</td>
+        <td>{{customer.city}}</td>
+        <td>{{customer.zipcode}}</td>
+        <td>{{customer.state}}</td>
+        <td>{{customer.created_at}}</td>
+      </tr>
+    {% endfor %}
+  {% endif %}
+
+  </tbody>
+</table>
+
+
 {% else %}
 <h1>Login</h1>
 <br/>
@@ -24,7 +62,7 @@
       </form>
 
 </form>
-</div>
+
 {% endif %}
 
 {% endblock %}
